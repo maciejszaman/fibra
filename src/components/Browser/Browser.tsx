@@ -16,5 +16,13 @@ export const Browser = () => {
       });
   }, []);
 
-  return <div className="bg-gray-700">Browser</div>;
+  return (
+    <>
+      <div className="bg-teal-950 h-screen fixed text-3xl text-teal-50 inset-0">
+        <div className="bg-teal-800 p-4">File path</div>
+        Browser
+      </div>
+      ;
+    </>
+  );
 };
