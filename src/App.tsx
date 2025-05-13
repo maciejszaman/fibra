@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { Foldertree } from "./components/FolderTree/Foldertree";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Browser } from "./components/Browser/Browser";
 
 function App() {
