@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.nio.file.Files;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 public class FileController {
 
@@ -38,7 +40,66 @@ public List<FileInfo> listFiles(@RequestParam(value = "path", required = false, 
         String apiPath = "/file/" + relativePath;
         boolean isFolder = f.isDirectory();
         String ext = isFolder ? "" : name.contains(".") ? name.substring(name.lastIndexOf('.') + 1) : "";
-        String type = isFolder ? "folder" : "file";
+        String type;
+
+        if (isFolder) {
+            type = "folder";
+        } else {
+            switch (ext) {
+                case "jpg":
+                case "jpeg":
+                    type = "jpg picture";
+                    break;
+                case "png":
+                    type = "png picture";
+                    break;
+                case "gif":
+                    type = "gif picture";
+                    break;
+                case "zip":
+                case "rar":
+                    type = "zip archive";
+                    break;
+                case "txt":
+                case "md":
+                case "log":
+                    type = "text file";
+                    break;
+                case "mp4":
+                case "mkv":
+                case "avi":
+                case "mov":
+                    type = "video file";
+                    break;
+                case "mp3":
+                case "wav":
+                case "flac":
+                    type = "audio file";
+                    break;
+                case "pdf":
+                    type = "pdf document";
+                    break;
+                case "html":
+                case "htm":
+                    type = "HTML document";
+                    break;
+                case "doc":
+                case "docx":
+                    type = "Word document";
+                    break;
+                case "xls":
+                case "xlsx":
+                    type = "Excel spreadsheet";
+                    break;
+                case "ppt":
+                case "pptx":
+                    type = "PowerPoint presentation";
+                    break;
+                default:
+                    type = "file";
+                    break;
+            }
+        }
 
         fileList.add(new FileInfo(name, apiPath, ext, type, isFolder));
     }
