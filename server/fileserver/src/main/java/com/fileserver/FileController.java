@@ -19,8 +19,8 @@ import java.nio.file.Files;
 @RestController
 public class FileController {
 
-    // ✅ Set this to your actual Pictures directory
-    private final String SHARED_DIR = "/home/maciej/Pictures";
+    // Base path of the server folder
+    private final String SHARED_DIR = "/home/maciej/";
 
 @GetMapping("/files")
 public List<FileInfo> listFiles(@RequestParam(value = "path", required = false, defaultValue = "") String subPath) {
@@ -122,7 +122,7 @@ public ResponseEntity<Resource> getFile(HttpServletRequest request) throws IOExc
         contentType = "application/octet-stream";
     }
 
-    // List of MIME types that should open in browser
+    // List of types that should open in browser instead of downloading
     List<String> inlineTypes = List.of(
         "image/jpeg", "image/png", "image/gif",
         "text/plain", "text/html",

@@ -1,5 +1,3 @@
-import React from "react";
-import * as Shared from "../../../shared/Shared.types";
 import * as Types from "./FileCard.types";
 import {
   IconCode,
