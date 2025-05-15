@@ -39,9 +39,9 @@ export const FileCard = ({
   };
 
   return (
-    <div className="flex flex-col justify-center h-full items-center text-sm gap-2">
+    <div className="flex flex-col justify-center h-full items-center text-sm gap-2 text-wrap text-center">
       {appropriateIcon(type)}
-      {name}
+      <span className="text-wrap">{name}</span>
     </div>
   );
 };
