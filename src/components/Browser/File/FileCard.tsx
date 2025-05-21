@@ -15,10 +15,7 @@ import {
   IconTable,
 } from "@tabler/icons-react";
 
-export const FileCard = ({
-  file: { folder, name, path, type, extension },
-  index,
-}: Types.FileCardTypes) => {
+export const FileCard = ({ file: { name, type } }: Types.FileCardTypes) => {
   const appropriateIcon = (type: string) => {
     if (type == "jpg picture") return <IconPhoto size={48} />;
     else if (type == "png picture") return <IconPhoto size={48} />;

@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
-:root {
-  font-family: Inter, Helvetica, system-ui, Avenir, Arial, sans-serif;
+* {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.bg-element {
+  background-color: var(--color-element);
+}
+
+.bg-background {
+  background-color: var(--color-background);
+}
+
+.bg-text {
+  color: var(--color-text);
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  color: var(--color-text);
 }

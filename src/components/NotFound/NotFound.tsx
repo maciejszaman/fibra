@@ -1,5 +1,4 @@
 import { IconChevronLeft, IconMoodEmpty } from "@tabler/icons-react";
-import React from "react";
 import { Link } from "react-router";
 
 export const NotFound = () => {

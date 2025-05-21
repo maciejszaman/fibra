@@ -4,7 +4,8 @@ import * as Types from "./Browser.types";
 import * as Shared from "../../shared/Shared.types";
 import { FileCard } from "./File/FileCard";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { IconChevronLeft, IconHome, IconSettings } from "@tabler/icons-react";
+import { IconChevronLeft, IconSettings } from "@tabler/icons-react";
+import { motion } from "motion/react";
 
 export const Browser = ({}: Types.BrowserTypes) => {
   const [files, setFiles] = React.useState<Shared.File[]>([]);
@@ -31,12 +32,12 @@ export const Browser = ({}: Types.BrowserTypes) => {
     if (file.folder) {
       navigate(`/files/${subPath ? `${subPath}/` : ""}${file.name}`);
     } else {
-      window.location.href = `http://127.0.0.1:8080${file.path}`;
+      window.location.href = `http://192.168.50.163:8080${file.path}`;
     }
   };
 
   useEffect(() => {
-    const baseUrl = "http://127.0.0.1:8080/files";
+    const baseUrl = "http://192.168.50.163:8080/files";
     const params = subPath ? { path: subPath } : {};
     axios
       .get(baseUrl, { params })
@@ -52,9 +53,9 @@ export const Browser = ({}: Types.BrowserTypes) => {
   return (
     <>
       <div className="wrapper flex justify-center">
-        <div className="bg-gray-200 h-screen w-full max-w-[1000px] dark:bg-stone-800 text-2xl p-4 text-stone-700 dark:text-stone-50">
+        <div className="bg-background h-screen w-full max-w-[1000px] text-2xl p-4 text-text">
           <div className="buttons flex gap-4 h-16">
-            <div className="p-2 flex items-center justify-center aspect-square w-fit bg-stone-700 text-white rounded-lg hover:bg-stone-600">
+            <div className="p-2 flex items-center justify-center aspect-square w-fit bg-element text-text rounded-lg shadow-sm hover:brightness-105">
               {!showBackButton ? (
                 <Link
                   to="/settings"
@@ -71,21 +72,32 @@ export const Browser = ({}: Types.BrowserTypes) => {
                 </Link>
               )}
             </div>
-            <div className="bg-gray-100 hover:bg-gray-50 hover:dark:bg-stone-600 text-center justify-center flex truncate w-full dark:bg-stone-700 shadow-sm rounded-lg p-4">
+            <div className="bg-element hover:brightness-105 text-center justify-center flex truncate w-full shadow-sm rounded-lg p-4">
               {currentFolder || "Home"}
             </div>
           </div>
-          <div className="folders grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4 mb-4">
+          <motion.div
+            key={`folders-${subPath}`}
+            initial={{ x: -50 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.335, ease: "easeOut" }}
+            className="folders grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4 mb-4"
+          >
             {sortedFiles.map((file, index) => (
-              <div
-                key={index}
+              <motion.div
+                key={`${file.name}-${index}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => handleClick(file)}
-                className="bg-gray-100 dark:bg-stone-700 p-4 text-wrap shadow-sm rounded-lg aspect-square hover:bg-gray-50 hover:dark:bg-stone-600 ease-in-out cursor-pointer"
+                className="bg-element p-4 text-wrap shadow-sm rounded-lg aspect-square hover:brightness-105 ease-in-out cursor-pointer"
               >
                 <FileCard file={file} index={index} />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

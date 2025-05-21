@@ -20,7 +20,7 @@ import java.nio.file.Files;
 public class FileController {
 
     // Base path of the server folder
-    private final String SHARED_DIR = "/home/maciej/";
+    private final String SHARED_DIR = "/home/szafa/shared";
 
 @GetMapping("/files")
 public List<FileInfo> listFiles(@RequestParam(value = "path", required = false, defaultValue = "") String subPath) {
